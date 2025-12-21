@@ -1,0 +1,94 @@
+// 1. Configuración de la base de datos
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 2. Configuración del "traductor"
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 3. ENUM: Definimos los roles permitidos
+enum Role {
+  CLIENT
+  ADMIN
+}
+
+// 4. MODELO DE USUARIO
+model User {
+  id        Int      @id @default(autoincrement()) // <-- CAMBIO AQUÍ
+  email     String   @unique
+  password  String
+  name      String
+  birthDate DateTime
+
+  role Role @default(CLIENT)
+
+  // Relaciones
+  cart   Cart?
+  orders Order[]
+}
+
+// 5. MODELO DE PRODUCTO
+model Product {
+  id          Int    @id @default(autoincrement()) // <-- CAMBIO AQUÍ
+  name        String
+  description String
+  price       Float
+  imageUrl    String
+  stock       Int
+  category    String
+
+  // Relaciones
+  orderItems CartItem[]
+  cartItems  OrderItem[]
+}
+
+// 6. MODELO DEL CARRITO
+model Cart {
+  id     Int    @id @default(autoincrement()) // <-- CAMBIO AQUÍ
+  userId Int    @unique // <-- CAMBIO AQUÍ (debe coincidir con User.id)
+
+  // Relaciones
+  user  User       @relation(fields: [userId], references: [id])
+  items CartItem[]
+}
+
+// 7. MODELO DEL ITEM EN EL CARRITO
+model CartItem {
+  id       Int @id @default(autoincrement()) // <-- CAMBIO AQUÍ
+  quantity Int
+
+  // Relaciones
+  cartId    Int     // <-- CAMBIO AQUÍ
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  productId Int     // <-- CAMBIO AQUÍ
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+// 8. MODELO DE LA ORDEN
+model Order {
+  id        Int      @id @default(autoincrement()) // <-- CAMBIO AQUÍ
+  createdAt DateTime @default(now())
+  total     Float
+  status    String   @default("PENDIENTE")
+
+  // Relaciones
+  userId Int     // <-- CAMBIO AQUÍ
+  user   User    @relation(fields: [userId], references: [id])
+  items  OrderItem[]
+}
+
+// 9. MODELO DEL ITEM EN LA ORDEN
+model OrderItem {
+  id              Int   @id @default(autoincrement()) // <-- CAMBIO AQUÍ
+  quantity        Int
+  priceAtPurchase Float
+
+  // Relaciones
+  orderId   Int     // <-- CAMBIO AQUÍ
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId Int     // <-- CAMBIO AQUÍ
+  product   Product @relation(fields: [productId], references: [id])
+}
