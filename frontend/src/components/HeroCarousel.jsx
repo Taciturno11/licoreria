@@ -5,13 +5,15 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import banner1 from '../assets/portada1.jpg'; 
+import banner1 from '../assets/portada1.png'; 
 
 function HeroCarousel() {
   return (
-    // 1. Quitamos mt-[70px] fijo y usamos pt-[70px] para que sea parte del flujo
-    // 2. CAMBIO CLAVE: Quitamos h-[500px] y usamos 'aspect' para mantener la proporción
-    <div className="w-full pt-[75px] bg-black"> 
+    // 1. EL CONTENEDOR PRINCIPAL
+    // 'w-full': Ocupa todo el ancho de la pantalla.
+    // 'mt-0': Pegado al navbar (o puedes darle mt-4 si quieres aire).
+    <div className="w-full mt-0">
+      
       <Swiper
         spaceBetween={0}
         centeredSlides={true}
@@ -24,28 +26,34 @@ function HeroCarousel() {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
+        
+        // 2. LA ALTURA FIJA (RESPONSIVE)
+        // h-[300px]: En celular.
+        // md:h-[400px]: En tablet.
+        // lg:h-[500px]: En pantallas grandes (PC).
+        className="mySwiper w-full h-[300px] md:h-[400px] lg:h-[500px]"
       >
         
         {/* --- SLIDE 1 --- */}
         <SwiperSlide>
-          {/* Usamos w-full y h-auto para que la imagen mande en la altura */}
-          <div className="w-full relative">
+          <div className="w-full h-full">
             <img 
               src={banner1} 
               alt="Chupa Causa Ofertas" 
-              // CAMBIO: 'object-contain' asegura que se vea TODO sin recortar nada
-              // 'w-full' asegura que ocupe todo el ancho
-              className="w-full h-auto object-contain md:max-h-[600px] mx-auto" 
+              // 3. LA CLAVE DEL ÉXITO: 'object-cover'
+              // Esto hace que la imagen llene el 100% del cuadro sin deformarse.
+              className="w-full h-full object-cover" 
             />
           </div>
         </SwiperSlide>
 
         {/* --- SLIDE 2 (Ejemplo) --- */}
         <SwiperSlide>
-           {/* Ajustamos este slide para que tenga una altura similar a la imagen (aprox) */}
-           <div className="w-full aspect-[21/9] bg-gradient-to-r from-blue-900 to-purple-900 flex items-center justify-center text-white text-3xl font-bold">
-              ¡Pronto más promos! 🚀
+           <div className="w-full h-full bg-gradient-to-r from-blue-900 to-black flex items-center justify-center">
+              <h2 className="text-white text-4xl md:text-6xl font-bold text-center px-4">
+                  ¡Tus Tragos Favoritos<br/>
+                  <span className="text-yellow-400">En la puerta de tu casa!</span> 🛵
+              </h2>
            </div>
         </SwiperSlide>
 

@@ -14,7 +14,7 @@ function Navbar() {
     <nav className="bg-white shadow-xl text-black sticky top-0 z-50 backdrop-blur-sm">
       
       {/* CAMBIO 2 (EL SECRETO): Creamos un contenedor que limita el ancho y centra todo (mx-auto) */}
-      <div className="w-full max-w-[1100px] mx-auto px-4 py-2 flex justify-between items-center gap-6">
+      <div className="w-full max-w-[1100px] mx-auto px-4 py-1 flex justify-between items-center gap-6">
 
         {/* 1. LADO IZQUIERDO: LOGO + BOTÓN CATEGORÍAS */}
         <div className="flex items-center gap-4">
@@ -22,14 +22,14 @@ function Navbar() {
             <img 
               src={logo} 
               alt="Logo Chupa Causa" 
-              className="h-12 w-auto font-bold hover:scale-105 transition-transform"
+              className="h-14 w-auto font-bold hover:scale-105 transition-transform"
             />
           </Link>
           
           {/* Botón de Categorías (Estilo Coolbox) */}
-          <button className="hidden lg:flex items-center gap-2 font-bold text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-full transition-colors">
+          <button className="hidden lg:flex items-center gap-2 font-bold  bg-yellow-400 hover:bg-gray-200 px-3 py-2 rounded-full transition-colors text-lg">
             <FaBars />
-            Menú
+            Categorías
           </button>
         </div>
 
@@ -38,10 +38,10 @@ function Navbar() {
           <input 
             type="text" 
             placeholder="Buscar licores, cervezas..." 
-            className="w-full border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
+            className="w-full border border-gray-500 rounded-full py-3 pl-4 pr-10 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
           />
           <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-600">
-            <FaSearch />
+            <FaSearch/>
           </button>
         </div>
         
@@ -54,7 +54,7 @@ function Navbar() {
               onClick={() => setMostrarMenu(!mostrarMenu)} 
               className="hover:text-blue-500 transition-colors flex items-center gap-2 cursor-pointer focus:outline-none"
             >
-              <FaRegUser className="text-2xl" />
+              <FaRegUser className="text-3xl" />
               <div className='hidden lg:block flex flex-col leading-tight text-xs text-center'>
                 <p>Iniciar</p>
                 <p>Sesión</p> 
@@ -90,7 +90,7 @@ function Navbar() {
           {/* MIS COMPRAS - TU CÓDIGO EXACTO */}
           <li>
             <Link to="/compras" className="hover:text-blue-500 transition-colors flex items-center gap-2 cursor-pointer focus:outline-none" >
-              <LuShoppingBag className='text-2xl' />
+              <LuShoppingBag className='text-3xl' />
               <div className='hidden lg:block flex flex-col text-xs leading-tight text-left'>
                   <p>Mis</p>
                   <p>Compras</p> 
@@ -104,7 +104,7 @@ function Navbar() {
           {/* CARRITO - TU CÓDIGO EXACTO */}
           <li>
             <Link to="/cart" className="hover:text-blue-500 transition-colors">
-              <FiShoppingCart className="inline text-2xl ml-1" />
+              <FiShoppingCart className="inline text-3xl ml-1" />
             </Link>
           </li>
 
