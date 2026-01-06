@@ -12,13 +12,13 @@ function HeroCarousel() {
     // 1. EL CONTENEDOR PRINCIPAL
     // 'w-full': Ocupa todo el ancho de la pantalla.
     // 'mt-0': Pegado al navbar (o puedes darle mt-4 si quieres aire).
-    <div className="w-full mt-0">
+    <div className="w-full mt-4">
       
       <Swiper
         spaceBetween={0}
         centeredSlides={true}
         autoplay={{
-          delay: 5000, 
+          delay: 50000, 
           disableOnInteraction: false,
         }}
         pagination={{
@@ -31,7 +31,7 @@ function HeroCarousel() {
         // h-[300px]: En celular.
         // md:h-[400px]: En tablet.
         // lg:h-[500px]: En pantallas grandes (PC).
-        className="mySwiper w-full h-[300px] md:h-[400px] lg:h-[500px]"
+        className="mySwiper w-full h-[300px] md:h-[400px] lg:h-[300px]"
       >
         
         {/* --- SLIDE 1 --- */}
